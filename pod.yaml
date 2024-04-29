@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: timezone
+    lang: dotnet-core
+  name: timezone-pod
+  namespace: test
+spec:
+  containers:
+  - image: quay.io/rhn_support_arolivei/samplenetapp01:v1
+    env: 
+      - name: TZ
+        value: "Pacific/Johnston"
+    name: timezone
+    securityContext:
+      allowPrivilegeEscalation: false
+      seccompProfile:
+        type: RuntimeDefault
+      capabilities:
+        drop:
+        - ALL
